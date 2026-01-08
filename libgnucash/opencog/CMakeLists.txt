@@ -3,6 +3,9 @@
 # This subsystem provides AI-powered financial intelligence based on
 # OpenCog's cognitive architecture, including:
 # - AtomSpace hypergraph database
+# - ATen tensor library for numerical computations
+# - ATenSpace hybrid symbolic-neural knowledge representation
+# - Tensor Logic for multi-entity, multi-scale, network-aware accounting
 # - Pattern matching engine
 # - Probabilistic reasoning
 # - Transaction categorization
@@ -26,6 +29,19 @@ set(OPENCOG_HEADERS
 
     # Pattern matching
     pattern/pattern_match.hpp
+
+    # ATen - Tensor library
+    aten/tensor.hpp
+    aten/tensor_ops.hpp
+
+    # ATenSpace - Hybrid symbolic-neural knowledge
+    atenspace/tensor_atom.hpp
+    atenspace/atenspace.hpp
+
+    # Tensor Logic - Multi-entity, multi-scale, network-aware accounting
+    tensor-logic/tensor_account.hpp
+    tensor-logic/tensor_network.hpp
+    tensor-logic/tensor_logic_engine.hpp
 
     # GnuCash cognitive integration
     gnc-cognitive/cognitive_engine.hpp
