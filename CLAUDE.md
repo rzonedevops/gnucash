@@ -32,7 +32,13 @@ libgnucash/           # Core library code
 ├── core-utils/       # Low-level utilities
 ├── gnc-module/       # Module loading system
 ├── quotes/           # Online price quote retrieval
-└── tax/              # Tax-related calculations
+├── tax/              # Tax-related calculations
+└── opencog/          # OpenCog Cognitive Subsystem (AI-powered intelligence)
+    ├── cogutil/      # Core utilities (threading, logging, counters)
+    ├── atomspace/    # Hypergraph knowledge database
+    ├── pattern/      # Pattern matching engine
+    ├── reasoning/    # Probabilistic reasoning (PLN)
+    └── gnc-cognitive/# GnuCash-specific cognitive integration
 
 bindings/             # Language bindings
 ├── guile/            # Guile (Scheme) bindings
@@ -176,6 +182,67 @@ GitHub Actions workflows in `.github/workflows/`:
 - `ci-tests.yml` - Main CI tests (Ubuntu, ASAN)
 - `coverage.yml` - Code coverage
 - `mac-tests.yaml` - macOS tests
+
+## OpenCog Cognitive Subsystem
+
+GnuCash includes an integrated cognitive framework based on OpenCog architecture, providing AI-powered financial intelligence.
+
+### Components
+
+| Component | Purpose |
+|-----------|---------|
+| **AtomSpace** | Hypergraph database for knowledge representation |
+| **Pattern Matcher** | Graph query engine for finding patterns |
+| **Cognitive Engine** | GnuCash-specific AI integration |
+| **Truth Values** | Probabilistic reasoning with confidence |
+
+### Key Features
+
+- **Automatic Transaction Categorization**: AI-powered category suggestions
+- **Spending Pattern Detection**: Identifies recurring transactions
+- **Anomaly Detection**: Flags unusual transactions
+- **Financial Predictions**: Cash flow forecasting
+- **Natural Language Queries**: Ask questions about your finances
+
+### Usage Example
+
+```cpp
+#include <opencog/gnc-cognitive/cognitive_engine.hpp>
+
+using namespace gnc::opencog;
+
+// Initialize the cognitive engine
+auto& engine = cognitive_engine();
+engine.initialize();
+
+// Categorize a transaction
+auto result = engine.categorize_transaction("Walmart Grocery", 45.00, "Walmart");
+// result.category = "Groceries", result.confidence = 0.85
+
+// Detect spending patterns
+auto patterns = engine.detect_spending_patterns();
+
+// Natural language query
+std::string answer = engine.query("What are my recurring expenses?");
+```
+
+### GnuCash-Specific Atom Types
+
+The cognitive subsystem defines financial atom types:
+
+- `AccountNode`, `TransactionNode`, `SplitNode` - Core financial entities
+- `VendorNode`, `CategoryNode` - Classification nodes
+- `CategorizationLink`, `FlowLink`, `PatternLink` - Relationship links
+- `AnomalyLink`, `PredictionLink` - AI-detected insights
+
+### Running Cognitive Tests
+
+```bash
+# Build and run OpenCog tests
+ninja gtest-atomspace gtest-pattern-match gtest-cognitive-engine
+./libgnucash/opencog/test/gtest-atomspace
+./libgnucash/opencog/test/gtest-cognitive-engine
+```
 
 ## Useful Commands
 
